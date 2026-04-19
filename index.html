@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
     <title>Stone Paper Scissor 3.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;700&display=swap"
         rel="stylesheet">
@@ -1511,10 +1512,58 @@
             margin-bottom: 25px;
         }
 
+    
+        #game-intro-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100dvh;
+            background: radial-gradient(circle at center, #ffdcb0 0%, #ffb142 100%);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .candy-title {
+            font-family: 'Titan One', cursive;
+            font-size: 60px;
+            text-align: center;
+            line-height: 1.1;
+            text-transform: uppercase;
+            text-shadow: 
+                -3px -3px 0 #b33939,  
+                 3px -3px 0 #b33939,
+                -3px  3px 0 #b33939,
+                 3px  3px 0 #b33939,
+                 0px  6px 0 #842525,
+                 0px  12px 15px rgba(0,0,0,0.4);
+            animation: bounceIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .candy-title div {
+            margin-bottom: -10px;
+            filter: drop-shadow(0px 2px 2px rgba(255,255,255,0.4));
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.1); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
     </style>
 </head>
 
 <body>
+
+    <div id="game-intro-screen">
+        <div class="candy-title">
+            <div style="color: #ffeb3b;">STONE</div>
+            <div style="color: #4fc3f7;">PAPER</div>
+            <div style="color: #ff7675;">SCISSOR</div>
+        </div>
+    </div>
+
 
     <canvas id="particle-canvas"></canvas>
     <div id="scanline-overlay"></div>
@@ -3039,6 +3088,23 @@
             }
 
             init() {
+                const introScreen = document.getElementById('game-intro-screen');
+                if (introScreen && !introScreen.dataset.played) {
+                    introScreen.dataset.played = "true";
+                    setTimeout(() => {
+                        introScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            introScreen.style.display = 'none';
+                            this.finishInit();
+                        }, 500);
+                    }, 2000);
+                } else {
+                    if (introScreen) introScreen.style.display = 'none';
+                    this.finishInit();
+                }
+            }
+
+            finishInit() {
                 if (!this.data.username) {
                     this.ui.els.userModal.classList.add('open');
                 } else {
