@@ -89,7 +89,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100dvh;
             width: 100vw;
         }
 
@@ -105,7 +105,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             z-index: 0;
             pointer-events: none;
         }
@@ -115,7 +115,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             z-index: 1;
             pointer-events: none;
             background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px);
@@ -562,7 +562,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             pointer-events: none;
             z-index: 10;
             opacity: 0;
@@ -574,7 +574,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -622,7 +622,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             background: #000;
             z-index: 999;
             display: none;
@@ -740,7 +740,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             background: rgba(0, 0, 0, 0.95);
             z-index: 40;
             display: flex;
@@ -889,7 +889,7 @@
             top: 100%;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             background: var(--bg-deep);
             z-index: 30;
             transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1394,8 +1394,8 @@
                 padding-bottom: 20px;
             }
             .top-bar {
-                flex-direction: column;
-                align-items: stretch;
+                flex-direction: row;
+                align-items: center;
                 gap: 10px;
             }
             .user-info {
@@ -1464,6 +1464,31 @@
                 letter-spacing: 0px;
             }
         }
+    
+        #sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
+            background: rgba(0,0,0,0.7); z-index: 100;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        #sidebar-overlay.active {
+            opacity: 1; pointer-events: auto;
+        }
+        #sidebar-menu {
+            position: fixed; top: 0; right: 0; width: 320px; max-width: 85vw; height: 100dvh;
+            background: var(--bg-card); border-left: 1px solid var(--neon-cyan);
+            z-index: 101; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+            display: flex; flex-direction: column; padding: 20px; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+        }
+        #sidebar-menu.active {
+            transform: translateX(0);
+        }
+        .sidebar-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border-glow); padding-bottom: 10px;
+        }
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
     </style>
 </head>
 
@@ -1474,32 +1499,13 @@
 
     <div id="game-wrap">
         <header id="header">
-            <div class="top-bar">
+            <div class="top-bar" style="justify-content: space-between; flex-wrap: nowrap;">
                 <div class="user-info">
-                    <span id="hdr-avatar">🤖</span>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23222'/%3E%3Ctext x='50' y='50' font-size='40' text-anchor='middle' dy='.3em'%3E🤖%3C/text%3E%3C/svg%3E" id="hdr-avatar" class="avatar-icon">
                     <span id="hdr-username">Player</span>
                     <span id="hdr-level" class="badge">L1</span>
                 </div>
-                <div class="difficulty-pills">
-                    <button class="diff-btn" data-diff="EASY">EASY</button>
-                    <button class="diff-btn active" data-diff="MEDIUM">MEDIUM</button>
-                    <button class="diff-btn" data-diff="HARD">HARD</button>
-                </div>
-                <div class="controls-row">
-                    <button class="icon-btn" id="btn-vault" aria-label="Vault" title="Achievement Vault">🏆</button>
-                    <button class="icon-btn" id="btn-leaderboard" aria-label="Rank" title="Global Arena">🌍</button>
-                    <button class="icon-btn" id="btn-profile" aria-label="Profile" title="Profile">👤</button>
-                    <button class="icon-btn" id="btn-stats" aria-label="Stats" title="Statistics">📊</button>
-                    <div class="sound-control" id="sound-wrap">
-                        <svg viewBox="0 0 24 24" class="sound-icon" id="sound-icon">
-                            <path
-                                d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                        </svg>
-                        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5"
-                            aria-label="Volume">
-                        <button id="btn-mute" aria-label="Mute">🔈</button>
-                    </div>
-                </div>
+                <button class="icon-btn" id="btn-sidebar-open" style="font-size: 20px; border-color:var(--neon-cyan); color:var(--neon-cyan);">☰</button>
             </div>
 
             <div class="score-board">
@@ -1546,6 +1552,48 @@
                 <div class="choice-icon">✂️</div>
                 <div class="choice-label">Scissor</div>
             </button>
+        </div>
+    </div>
+
+    
+    <div id="sidebar-overlay"></div>
+    <div id="sidebar-menu">
+        <div class="sidebar-header">
+            <h2 class="bebas" style="font-size:32px; color:var(--neon-cyan); margin:0;">GAME MENU</h2>
+            <button class="icon-btn" id="btn-sidebar-close" style="background:transparent; border:none; box-shadow:none; font-size:24px; color:var(--neon-orange);">×</button>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3 class="bebas" style="color:var(--text-muted); margin-bottom:10px;">DIFFICULTY</h3>
+            <div class="difficulty-pills" style="width:100%; display:flex;">
+                <button class="diff-btn" data-diff="EASY" style="flex:1;">EASY</button>
+                <button class="diff-btn active" data-diff="MEDIUM" style="flex:1;">MEDIUM</button>
+                <button class="diff-btn" data-diff="HARD" style="flex:1;">HARD</button>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="bebas" style="color:var(--text-muted); margin-bottom:10px;">CONTROLS</h3>
+            <div class="controls-row" style="flex-wrap:wrap; justify-content:flex-start;">
+                <button class="icon-btn" id="btn-vault" aria-label="Vault" title="Achievement Vault">🏆</button>
+                <button class="icon-btn" id="btn-leaderboard" aria-label="Rank" title="Global Arena">🌍</button>
+                <button class="icon-btn" id="btn-profile" aria-label="Profile" title="Profile">👤</button>
+                <button class="icon-btn" id="btn-stats" aria-label="Stats" title="Statistics">📊</button>
+                <div class="sound-control" id="sound-wrap" style="width:100%; margin-top:15px; justify-content:space-between;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <svg viewBox="0 0 24 24" class="sound-icon" id="sound-icon" style="width:20px;height:20px;">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                        </svg>
+                        <span style="font-weight:700; font-size:14px;">VOLUME</span>
+                    </div>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5" aria-label="Volume">
+                    <button id="btn-mute" aria-label="Mute" style="background:none; border:none; color:var(--text-primary); outline:none;">🔈</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section" style="margin-top:auto;">
+            <button class="btn" style="width:100%; background:var(--bg-raised); color:var(--text-muted); border-color:var(--text-muted); cursor:not-allowed;" title="Future Update">MULTIPLAYER (COMING SOON)</button>
         </div>
     </div>
 
@@ -3102,6 +3150,22 @@
         }
 
         window.onload = () => new GameEngine();
+    </script>
+    <script>
+
+        document.getElementById('btn-sidebar-open').addEventListener('click', () => {
+            document.getElementById('sidebar-menu').classList.add('active');
+            document.getElementById('sidebar-overlay').classList.add('active');
+        });
+        document.getElementById('btn-sidebar-close').addEventListener('click', () => {
+            document.getElementById('sidebar-menu').classList.remove('active');
+            document.getElementById('sidebar-overlay').classList.remove('active');
+        });
+        document.getElementById('sidebar-overlay').addEventListener('click', () => {
+            document.getElementById('sidebar-menu').classList.remove('active');
+            document.getElementById('sidebar-overlay').classList.remove('active');
+        });
+
     </script>
 </body>
 
