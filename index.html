@@ -1388,47 +1388,80 @@
             }
         }
 
-        @media (max-width: 480px) {
+                @media (max-width: 480px) {
+            #game-wrap {
+                padding: 10px;
+                padding-bottom: 20px;
+            }
             .top-bar {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 10px;
             }
-
             .user-info {
                 justify-content: center;
             }
-
+            .difficulty-pills {
+                display: flex;
+                width: 100%;
+            }
+            .diff-btn {
+                flex: 1;
+                font-size: 14px;
+                padding: 6px 0;
+            }
             .controls-row {
                 justify-content: center;
+                gap: 6px;
+                flex-wrap: wrap;
             }
-
-            .ach-grid {
-                grid-template-columns: 1fr 1fr;
+            .icon-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
             }
-
+            .sound-control {
+                padding: 4px 8px;
+            }
             .score-numbers {
-                font-size: 48px;
+                font-size: 40px;
                 gap: 15px;
             }
-
-            #choice-row {
-                flex-wrap: wrap;
-                gap: 10px;
+            .score-vs {
+                font-size: 28px;
             }
-
-            .choice-card {
-                width: 45%;
-                height: 100px;
+            .reveal-arena {
+                gap: 15px;
             }
-
-            .choice-card:last-child {
-                width: 90%;
-            }
-
             .reveal-card {
-                width: 90px;
-                height: 120px;
-                font-size: 48px;
+                width: 80px;
+                height: 110px;
+                font-size: 40px;
+            }
+            #combo-text {
+                font-size: 32px;
+            }
+            #choice-row {
+                flex-wrap: nowrap;
+                gap: 6px;
+                justify-content: space-between;
+                width: 100%;
+            }
+            .choice-card {
+                flex: 1;
+                height: 100px;
+                width: auto;
+            }
+            .choice-card:last-child {
+                width: auto;
+            }
+            .choice-icon {
+                font-size: 32px;
+                margin-bottom: 5px;
+            }
+            .choice-label {
+                font-size: 13px;
+                letter-spacing: 0px;
             }
         }
     </style>
