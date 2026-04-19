@@ -1502,7 +1502,7 @@
 
         <div id="choice-row">
             <button class="choice-card" data-choice="stone" aria-label="Choose Stone">
-                <div class="choice-icon">🪨</div>
+                <div class="choice-icon"><img src="brown_stone.png" alt="stone" style="width: 1em; height: 1em; vertical-align: middle; object-fit: contain;"></div>
                 <div class="choice-label">Stone</div>
             </button>
             <button class="choice-card" data-choice="paper" aria-label="Choose Paper">
@@ -1551,7 +1551,7 @@
             <div class="splash-word" style="color:var(--neon-orange)">SCISSOR</div>
         </div>
         <div class="splash-icons" id="spl-icons">
-            <div class="splash-icon">🪨</div>
+            <div class="splash-icon"><img src="brown_stone.png" alt="stone" style="width: 1em; height: 1em; vertical-align: middle; object-fit: contain;"></div>
             <div class="splash-icon">📄</div>
             <div class="splash-icon">✂️</div>
         </div>
@@ -1571,7 +1571,7 @@
                 autocomplete="off">
 
             <div class="avatar-row" id="reg-avatars">
-                <button class="avatar-btn selected">🪨</button>
+                <button class="avatar-btn selected"><img src="brown_stone.png" alt="stone" style="width: 1em; height: 1em; vertical-align: middle; object-fit: contain;"></button>
                 <button class="avatar-btn">📄</button>
                 <button class="avatar-btn">✂️</button>
                 <button class="avatar-btn">🤖</button>
@@ -1697,7 +1697,7 @@
         // UTILS & DATA
         // ==========================================
         const RULES = {
-            stone: { beats: 'scissor', icon: '🪨' },
+            stone: { beats: 'scissor', icon: '<img src="brown_stone.png" alt="stone" style="width: 1em; height: 1em; vertical-align: middle; object-fit: contain;">' },
             paper: { beats: 'stone', icon: '📄' },
             scissor: { beats: 'paper', icon: '✂️' }
         };
@@ -1720,10 +1720,10 @@
             { id: "flawless", name: "Flawless Victory", desc: "Win a best-of-5 5-0", icon: "✨", type: "COMBAT", rarity: "legendary" },
             { id: "perfect_season", name: "Perfect Season", desc: "Win 3 matches in a row", icon: "🏆", type: "COMBAT", rarity: "legendary" },
             // MASTERY
-            { id: "stone_charmer", name: "Stone Charmer", desc: "Win 10 rounds with Stone", icon: "🪨", type: "MASTERY", rarity: "common" },
+            { id: "stone_charmer", name: "Stone Charmer", desc: "Win 10 rounds with Stone", icon: "<img src="brown_stone.png" alt="stone" style="width: 1em; height: 1em; vertical-align: middle; object-fit: contain;">", type: "MASTERY", rarity: "common" },
             { id: "aquatic_ace", name: "Aquatic Ace", desc: "Win 10 rounds with Paper", icon: "📄", type: "MASTERY", rarity: "common" },
             { id: "scissorslinger", name: "Scissorslinger", desc: "Win 10 rounds with Scissor", icon: "✂️", type: "MASTERY", rarity: "common" },
-            { id: "stone_master", name: "Stone Master", desc: "Win 50 rounds with Stone", icon: "🪨", type: "MASTERY", rarity: "epic" },
+            { id: "stone_master", name: "Stone Master", desc: "Win 50 rounds with Stone", icon: "<img src="brown_stone.png" alt="stone" style="width: 1em; height: 1em; vertical-align: middle; object-fit: contain;">", type: "MASTERY", rarity: "epic" },
             { id: "paper_lord", name: "Paper Lord", desc: "Win 50 rounds with Paper", icon: "📄", type: "MASTERY", rarity: "epic" },
             { id: "scissor_god", name: "Scissor God", desc: "Win 50 rounds with Scissor", icon: "✂️", type: "MASTERY", rarity: "epic" },
             { id: "balanced", name: "Balanced Fighter", desc: "Use all 3 moves at least 10 times", icon: "⚖️", type: "MASTERY", rarity: "rare" },
@@ -1801,7 +1801,7 @@
                 } catch (e) { }
 
                 // Generate bots
-                const avatars = ['🪨', '📄', '✂️', '🤖', '👾', '🦊', '🔥', '💀'];
+                const avatars = ['<img src="brown_stone.png" alt="stone" style="width: 1em; height: 1em; vertical-align: middle; object-fit: contain;">', '📄', '✂️', '🤖', '👾', '🦊', '🔥', '💀'];
                 const names = ['ViperX99', 'AquaStrike', 'ScissornerPro', 'ShadowNinja', 'CryptoKing', 'NeonRider', 'CyberPunk', 'GlitchBot', 'ZeroCool', 'AcidBurn', 'CrashOverride', 'LordSith', 'JediMaster', 'PixelHero', 'BitCrusher', 'SynthWave', 'RetroGamer', 'FutureCop', 'MegaTron'];
                 const bots = [];
                 const elos = [950, 980, 990, 1020, 1050, 1080, 1110, 1140, 1170, 1190, 1200, 1220, 1250, 1280, 1310, 1350, 1390, 1420, 1500];
